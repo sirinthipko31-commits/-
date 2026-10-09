@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าชมรมต่างๆ</title>
+    <!-- Google Font: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- วางบรรทัดนี้ในส่วน <head> </head> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #4a148c, #7b1fa2);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-brand img {
+            width: 45px;
+            height: 45px;
+        }
+
+        .nav-brand span {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 0.8;
+            font-weight: 600;
+            border-bottom: 2px solid white;
+            padding-bottom: 3px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #6b11ff);
+            color: white;
+            padding: 50px 5%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .hero-quote {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .hero-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .hero-icon-circle {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #00e5ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #00e5ff;
+            margin-bottom: 8px;
+            background: rgba(0,0,0,0.2);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #ffeb3b;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        /* Container & Sections */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #ff9800;
+            padding-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .section-divider {
+            flex-grow: 1;
+            margin-left: 20px;
+            height: 4px;
+            background: repeating-linear-gradient(45deg, #7b1fa2, #7b1fa2 10px, transparent 10px, transparent 20px);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #eaeaea;
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4a148c;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .card-date {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .card-img-placeholder {
+            width: 140px;
+            height: 100px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            border: 2px dashed #ccc;
+        }
+
+        .btn-more {
+            display: inline-block;
+            background-color: #673ab7;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-more:hover {
+            background-color: #512da8;
+        }
+
+        /* Popular Clubs Specific Card */
+        .club-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .club-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .club-icon {
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            color: #7b1fa2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .club-images {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: center;
+        }
+
+        .club-img-box {
+            width: 48%;
+            height: 150px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.75rem;
+        }
+
+        .club-card .btn-more {
+            align-self: center;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #512da8;
+            color: white;
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-info {
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            color: white;
+            background: rgba(255,255,255,0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <img src="logo1.png" alt="Logo">
+            <span>วิทยาลัยเทคนิคเพชรบูรณ์</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html.html">หน้าแรก</a></li>
+            <li><a href="3.html.html">ข่าวสาร</a></li>
+            <li><a href="2.html.html" class="active">ชมรม</a></li>
+            <li><a href="4.html.html">ติดต่อ</a></li>
+        </ul>
+    </header>
+<!-- โซนแนะนำขั้นตอนการสมัคร -->
+<div style="margin: 40px 0; text-align: center;">
+    <h3 style="color: #333; font-size: 1.3rem; margin-bottom: 25px; position: relative; display: inline-block;">
+        📌 ขั้นตอนการสมัครเข้าเป็นสมาชิกชมรม
+    </h3>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: center;">
+        
+        <!-- Step 1 -->
+        <div style="background: white; border: 1px solid #eee; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+            <div style="font-size: 2rem; color: #6f42c1; margin-bottom: 10px;"><i class="fas fa-search"></i></div>
+            <h4 style="margin: 0 0 8px 0; color: #333;">1. เลือกชมรมที่สนใจ</h4>
+            <p style="margin: 0; color: #666; font-size: 0.85rem;">ค้นหาชมรมที่ตรงกับความชอบหรือสาขาวิชาที่เรียน</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="background: white; border: 1px solid #eee; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+            <div style="font-size: 2rem; color: #6f42c1; margin-bottom: 10px;"><i class="fas fa-building"></i></div>
+            <h4 style="margin: 0 0 8px 0; color: #333;">2. ไปที่ตึก 60 ปี</h4>
+            <p style="margin: 0; color: #666; font-size: 0.85rem;">ติดต่อห้องกิจกรรมใต้ตึก 60 ปี เพื่อขอรับและกรอกใบสมัคร</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="background: white; border: 1px solid #eee; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+            <div style="font-size: 2rem; color: #28a745; margin-bottom: 10px;"><i class="fas fa-user-check"></i></div>
+            <h4 style="margin: 0 0 8px 0; color: #333;">3. ยืนยันการเป็นสมาชิก</h4>
+            <p style="margin: 0; color: #666; font-size: 0.85rem;">ส่งใบสมัครกับประธานชมรมหรืออาจารย์ที่ปรึกษา และเริ่มทำกิจกรรมได้เลย</p>
+        </div>
+
+    </div>
+</div>
+    <div style="background: linear-gradient(135deg, #6f42c1, #4e2a8e); color: white; border-radius: 15px; padding: 25px; margin: 25px 0; display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 15px;">
+    <div>
+        <h2 style="margin: 0; font-size: 2rem; color: #ffc107;">21</h2>
+        <p style="margin: 5px 0 0; font-size: 0.9rem;">ชมรมทั้งหมด</p>
+    </div>
+    <div>
+        <h2 style="margin: 0; font-size: 2rem; color: #ffc107;">4</h2>
+        <p style="margin: 5px 0 0; font-size: 0.9rem;">หมวดหมู่กิจกรรม</p>
+    </div>
+    <div>
+        <h2 style="margin: 0; font-size: 2rem; color: #ffc107;">100%</h2>
+        <p style="margin: 5px 0 0; font-size: 0.9rem;">การมีส่วนร่วมของนักศึกษา</p>
+    </div>
+</div>
+
+
+    <!-- Main Content Container -->
+    <div class="container">
+</head>
+<body>
+        <!-- Popular Clubs Section -->
+        <div class="section-header" style="margin-top: 50px;">
+            <h1 class="section-title">ชมรมในวิทยาลัยเทคนิคเพชรบูรณ์</h1>
+            <div class="section-divider"></div>
+        </div>
+        <div>
+            <h3>การจัดตั้งชมรมมีวัตถุประสงค์หลักเพื่อเป็นศูนย์รวมของกลุ่มคนที่มีความสนใจ ความชอบ หรือเป้าหมายเดียวกัน ได้มีพื้นที่ในการแลกเปลี่ยนเรียนรู้และทำกิจกรรมร่วมกันอย่างเป็นระบบ ช่วยส่งเสริมการทำงานเป็นทีม พัฒนาทักษะทางสังคม และภาวะผู้นำ นอกเหนือจากการเรียนหรือการทำงานปกติ ทั้งยังเปิดโอกาสให้สมาชิกได้แสดงศักยภาพ สร้างสรรค์คุณประโยชน์ให้แก่ส่วนรวม และสร้างเครือข่ายความสัมพันธ์อันดีระหว่างกันได้อย่างยั่งยืน</h3>
+            <br>
+        </div>
+
+        <div class="grid-3">
+            <!-- Popular Club 1 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><i class="fas fa-music"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมดนตรีและนาฏศิลป์</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และฝึกทักษะทางด้านดนตรี ทั้งการร้อง การเล่นเครื่องดนตรี และการทำงานเป็นวง มุ่งเน้นการส่งเสริมความคิดสร้างสรรค์ การแสดงออกอย่างมั่นใจ และสร้างประสบการณ์ผ่านกิจกรรมการแสดงในโอกาสต่าง ๆ</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 2 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/TO_BE_NUMBER_ONE_Logo.svg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรม TO BE NUMBER ONE</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และส่งเสริมกิจกรรมชมรม TO BE NUMBER ONE มุ่งเน้นการรณรงค์ป้องกันและแก้ไขปัญหายาเสพติด การกล้าแสดงออกอย่างสร้างสรรค์ และการพัฒนาศักยภาพเยาวชนให้เป็นคนเก่งและดี</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 3 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/gen z.png" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรม GEN Z</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการส่งเสริมความคิดสร้างสรรค์และพลังของคนรุ่นใหม่ มุ่งเน้นการเปิดพื้นที่แลกเปลี่ยนมุมมอง เทรนด์นวัตกรรม และการสร้างสรรค์กิจกรรมดิจิทัลที่ตอบโจทย์ไลฟ์สไตล์ของเยาวชนยุคใหม่</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+        </div>
+        
+    <br>
+    
+        <div class="grid-3">
+            <!-- Popular Club 1 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                   <div class="club-card-header" style="gap: px; justify-content: flex-start;">
+    <div class="club-icon">
+        <img src="logo/ช่างกล.jpeg" alt="โลโก้" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+    </div>
+    <div class="card-title" style="margin: 0;">ชมรมช่างกล</div>
+</div>
+                </div>
+                <div class="card-text">รวมตัวคนมีใจรักในงานช่าง ร่วมเรียนรู้ ทักษะทางกลไก เครื่องยนต์ และการประดิษฐ์สร้างสรรค์นวัตกรรมร่วมกัน</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 2 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo//เชื่อม.jpeg" alt="โลโก้" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+    </i></div>
+                    <div class="card-title" style="margin:0;">ชมรมช่างเชื่อม</div>
+                </div>
+                <div class="card-text">ศูนย์รวมคนมีไฟที่มุ่งมั่นเรียนรู้ทักษะการประสานและหลอมรวมโลหะ เพื่อสร้างสรรค์โครงสร้างและนวัตกรรมที่แข็งแกร่ง</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 3 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/ช่างยนต์.jpeg" alt="โลโก้" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+    </i></div>
+                    <div class="card-title" style="margin:0;">ชมรมช่างยนต์</div>
+                </div>
+                <div class="card-text">ศูนย์รวมผู้เชี่ยวชาญด้านเครื่องยนต์ที่เรียนรู้ทักษะการตรวจเช็ก ซ่อมบำรุง และดูแลรักษายานพาหนะอย่างเป็นระบบ</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+    </div>
+        <br>
+        <div class="grid-3">
+            <!-- Popular Club 1 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/ไฟฟ้า.png" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมไฟฟ้ากำลัง</div>
+                </div>
+                <div class="card-text">ศูนย์รวมผู้เชี่ยวชาญด้านระบบพลังงานไฟฟ้าที่เรียนรู้การออกแบบ ควบคุม และดูแลการส่งจ่ายกำลังไฟฟ้าอย่างปลอดภัยและมีประสิทธิภาพ</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 2 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/เมคคา.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมเมคคาทรอนิกส์</div>
+                </div>
+                <div class="card-text">ศูนย์รวมผู้บูรณาการเทคโนโลยีที่ผสานระบบกลไก อิเล็กทรอนิกส์ คอมพิวเตอร์ และการควบคุมอัตโนมัติ เพื่อสร้างสรรค์หุ่นยนต์และนวัตกรรมสมองกล</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 3 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/เทคนิคคอม.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมเทคนิคคอมพิวเตอร์</div>
+                </div>
+                <div class="card-text">ศูนย์รวมการศึกษาและพัฒนาทักษะด้านระบบฮาร์ดแวร์ เทคโนโลยีเครือข่าย และการประยุกต์ใช้ซอฟต์แวร์คอมพิวเตอร์</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="grid-3">
+            <!-- Popular Club 1 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/ถาปัต.png" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมสถาปัตยกรรม</div>
+                </div>
+                <div class="card-text">ศูนย์รวมการเรียนรู้ทฤษฎีการออกแบบ การเขียนแบบอาคาร และการสร้างสรรค์โมเดลเพื่อการพัฒนาพื้นที่อย่างมีศิลปะและฟังก์ชัน</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 2 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/บัญชี.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมบัญชี</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และฝึกฝนทักษะวิชาชีพบัญชีทั้งภาคทฤษฎีและภาคปฏิบัติ มุ่งเน้นการจัดกิจกรรมเสริมสร้างประสบการณ์จริง การทำงานเป็นทีม และเตรียมความพร้อมสู่อาชีพนักบัญชีมืออาชีพ</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 3 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/คอม.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมเทคโนโลยีธุรกิจดิจิทัล</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และพัฒนาทักษะด้านเทคโนโลยี สื่อดิจิทัล และนวัตกรรมคอมพิวเตอร์ มุ่งเน้นการฝึกปฏิบัติจริง การสร้างสรรค์ผลงานดิจิทัล และเตรียมความพร้อมสู่อาชีพสายเทคโนโลยีแห่งอนาคต</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="grid-3">
+            <!-- Popular Club 1 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/ตลาด.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมการตลาด</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และพัฒนาทักษะด้านการตลาด ยุคใหม่ทั้งออนไลน์และออฟไลน์ มุ่งเน้นการวางกลยุทธ์ การสร้างแบรนด์ การทำคอนเทนต์ และสร้างนักการตลาดมืออาชีพที่เท่าทันโลกธุรกิจ</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 2 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/จัดการ.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมการจัดการสำนักงาน</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และพัฒนาทักษะการบริหารจัดการงานเอกสาร เทคโนโลยีนวัตกรรมสำนักงาน และการประสานงานอย่างมีระบบ มุ่งเน้นการฝึกปฏิบัติจริงและสร้างนักบริหารจัดการสำนักงานมืออาชีพยุคใหม่</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 3 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/ท่องเที่ยว.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมการท่องเที่ยว</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และพัฒนาทักษะด้านการบริการ มุ่งเน้นการวางแผนการท่องเที่ยว การเป็นผู้นำเที่ยว การบริหารจัดการธุรกิจท่องเที่ยวและการโรงแรม เพื่อสร้างนักบริการมืออาชีพยุคใหม่</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="grid-3">
+            <!-- Popular Club 1 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/อาหาร.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมอาหารและโภชนาการ</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และพัฒนาทักษะด้านการประกอบอาหาร การโภชนาการ และการบริหารจัดการธุรกิจอาหาร มุ่งเน้นการฝึกปฏิบัติจริง ศิลปะการตกแต่งจาน และสร้างเชฟมืออาชีพระดับสากล</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 2 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/แฟชั่น.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมแฟชั่นและสิ่งทอ</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และพัฒนาทักษะด้านการออกแบบเสื้อผ้า โครงสร้างสิ่งทอ และเทรนด์แฟชั่น มุ่งเน้นการตัดเย็บ การดีไซน์สร้างสรรค์ และเตรียมความพร้อมสู่นักออกแบบและนักบริหารธุรกิจแฟชั่นมืออาชีพ</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 3 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/โรงแรม.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมโรงแรม</div>
+                </div>
+                <div class="card-text">ศูนย์กลางการเรียนรู้และพัฒนาทักษะด้านการบริหารจัดการงานโรงแรม การบริการลูกค้า และงานปฏิบัติการห้องพัก มุ่งเน้นการฝึกทักษะงานบริการระดับสากล และสร้างบุคลากรคุณภาพสู่อุตสาหกรรมการบริการยุคใหม่</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="grid-3">
+            <!-- Popular Club 1 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><img src="logo/โรงแรม.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรมดนตรีและศิลปะ</div>
+                </div>
+                <div class="card-text">พื้นที่แสดงออกทางดนตรี การขับร้อง การเต้น และงานศิลปะสร้างสรรค์สำหรับคนรักเสียงเพลง</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 2 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><i class="fas fa-music"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรม TO BE NUMBER ONE</div>
+                </div>
+                <div class="card-text">เพื่อรณรงค์ป้องกันและแก้ไขปัญหายาเสพติด โดยมุ่งหวังให้วัยรุ่นและเยาวชนพึ่งพาตนเองได้ ไม่ตกเป็นทาสของยาเสพติด และ "เป็นหนึ่งโดยไม่พึ่งยาเสพติด"</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+
+            <!-- Popular Club 3 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><i class="fas fa-music"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรม GEN Z</div>
+                </div>
+                <div class="card-text">กิจกรรมรณรงค์ ป้องกัน และสร้างเครือข่ายเยาวชนรุ่นใหม่ให้รู้เท่าทันพิษภัยของบุหรี่ บุหรี่ไฟฟ้า และสิ่งเสพติดทุกชนิด</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- Popular Club 3 -->
+            <div class="club-card">
+                <div class="club-card-header">
+                    <div class="club-icon"><i class="fas fa-music"></i></div>
+                    <div class="card-title" style="margin:0;">ชมรม GEN Z</div>
+                </div>
+                <div class="card-text">กิจกรรมรณรงค์ ป้องกัน และสร้างเครือข่ายเยาวชนรุ่นใหม่ให้รู้เท่าทันพิษภัยของบุหรี่ บุหรี่ไฟฟ้า และสิ่งเสพติดทุกชนิด</div>
+                <div class="club-images">
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                    <div class="club-img-box"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+        </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            สถาบันการอาชีวศึกษาภาคเหนือ 3<br>
+            วิทยาลัยเทคนิคเพชรบูรณ์<br>
+            โทร : 056-713455<br>
+            อีเมล : pbtv212@pbtvc.ac.th
+        </div>
+        <div class="footer-social">
+            <a href="https://www.facebook.com/pbntc212" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/pbntc_phatchabun?fbclid=IwY2xjawT1NMFwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMUptSWFkWFlBNUU1SFdId0xzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeqMKcpNrXhVjkGf2qEfYhVu5asqF13Vax4Yh1QWXd1qkUD3rdpHWZ-ECdcaA_aem_GpxBOkOAA0u2pzh-C9AUOg" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@technical.story" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@TECHNICA_STORY" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

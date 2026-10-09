@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าติดต่อ</title>
+    <!-- Google Font: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #4a148c, #7b1fa2);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-brand img {
+            width: 45px;
+            height: 45px;
+        }
+
+        .nav-brand span {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 0.8;
+            font-weight: 600;
+            border-bottom: 2px solid white;
+            padding-bottom: 3px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #6b11ff);
+            color: white;
+            padding: 50px 5%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .hero-quote {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .hero-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .hero-icon-circle {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #00e5ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #00e5ff;
+            margin-bottom: 8px;
+            background: rgba(0,0,0,0.2);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #ffeb3b;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        /* Container & Sections */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #ff9800;
+            padding-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .section-divider {
+            flex-grow: 1;
+            margin-left: 20px;
+            height: 4px;
+            background: repeating-linear-gradient(45deg, #7b1fa2, #7b1fa2 10px, transparent 10px, transparent 20px);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #eaeaea;
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4a148c;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .card-date {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .card-img-placeholder {
+            width: 140px;
+            height: 100px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            border: 2px dashed #ccc;
+        }
+
+        .btn-more {
+            display: inline-block;
+            background-color: #673ab7;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-more:hover {
+            background-color: #512da8;
+        }
+
+        /* Popular Clubs Specific Card */
+        .club-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .club-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .club-icon {
+            width: 40px;
+            height: 40px;
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .club-images {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: center;
+        }
+
+        .club-img-box {
+            width: 48%;
+            height: 150px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.75rem;
+        }
+
+        .club-card .btn-more {
+            align-self: center;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #512da8;
+            color: white;
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-info {
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            color: white;
+            background: rgba(255,255,255,0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <img src="logo1.png" alt="Logo">
+            <span>วิทยาลัยเทคนิคเพชรบูรณ์</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html.html">หน้าแรก</a></li>
+            <li><a href="3.html.html">ข่าวสาร</a></li>
+            <li><a href="2.html.html">ชมรม</a></li>
+            <li><a href="4.html.html" class="active">ติดต่อ</a></li>
+        </ul>
+    </header>
+    <!-- ส่วนติดต่อเรา (Contact Us Section) -->
+<div class="contact-section">
+  <div class="contact-container">
+    
+    <!-- หัวข้อส่วน -->
+    <div class="contact-header">
+      <h2>ติดต่อเรา</h2>
+      <p>มีข้อสงสัยเกี่ยวกับชมรม กิจกรรมนักศึกษา หรือต้องการจัดตั้งชมรมใหม่ สอบถามเราได้เลย</p>
+    </div>
+
+    <!-- ส่วนเนื้อหาหลักแบ่ง 2 คอลัมน์ -->
+    <div class="contact-grid">
+      
+      <!-- คอลัมน์ซ้าย: ข้อมูลการติดต่อ + โซเชียล -->
+      <div class="contact-info-card">
+        <h3>ข้อมูลการติดต่อ</h3>
+        <p class="info-desc">งานกิจกรรมนักศึกษา ฝ่ายพัฒนากิจการนักเรียน นักศึกษา วิทยาลัยเทคนิคเพชรบูรณ์</p>
+        
+        <div class="info-list">
+          <div class="info-item">
+            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <strong>ที่อยู่:</strong>
+              <p>123 ถนนสระบุรี-หล่มสัก ต.ในเมือง อ.เมือง จ.เพชรบูรณ์ 67000</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <strong>เบอร์โทรศัพท์:</strong>
+              <p>056-711-XXX (ต่อ งานกิจกรรมนักศึกษา)</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <strong>อีเมล:</strong>
+              <p>activity@phettech.ac.th</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon-box"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <strong>เวลาทำการ:</strong>
+              <p>จันทร์ - ศุกร์ : 08:30 - 16:30 น. (เว้นวันหยุดนักขัตฤกษ์)</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- โซเชียลมีเดีย -->
+        <div class="social-block">
+          <h4>ติดตามกิจกรรมชมรมผ่านโซเชียลมีเดีย</h4>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/pbntc212" target="_blank" rel="noopener noreferrer" class="social-btn facebook" title="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/pbntc_phatchabun?fbclid=IwY2xjawT1NMFwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMUptSWFkWFlBNUU1SFdId0xzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeqMKcpNrXhVjkGf2qEfYhVu5asqF13Vax4Yh1QWXd1qkUD3rdpHWZ-ECdcaA_aem_GpxBOkOAA0u2pzh-C9AUOg" target="_blank" rel="noopener noreferrer" class="social-btn instagram" title="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@technical.story" target="_blank" rel="noopener noreferrer" class="social-btn tiktok" title="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.youtube.com/@TECHNICA_STORY" target="_blank" rel="noopener noreferrer" class="social-btn youtube" title="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      
+    <!-- ส่วนแผนที่ และ คำถามพบบ่อย (FAQ) -->
+    <div class="bottom-grid">
+      <!-- แผนที่ Google Maps -->
+      <div class="map-card">
+        <h3><i class="fa-solid fa-map-location-dot"></i> แผนที่วิทยาลัย</h3>
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3824.288512338166!2d101.1558231!3d16.4216892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3120150d1822ad71%3A0xe510b150918731ad!2z4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lia4LmA4LiX4LiE4LiZ4Li04LiE4LmA4Lie4LiK4Lij4Lia4Li54Lij4LiO!5e0!3m2!1sth!2sth!4v1700000000000!5m2!1sth!2sth" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- FAQ คำถามที่พบบ่อย -->
+      <div class="faq-card">
+        <h3><i class="fa-solid fa-circle-question"></i> คำถามที่พบบ่อย (FAQ)</h3>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>สมัครเข้าชมรมได้ช่วงไหนบ้าง?</summary>
+            <p>เปิดรับสมัครหลักในช่วงสัปดาห์แรกของแต่ละภาคเรียน แต่บางชมรมเปิดรับสมาชิกตลอดทั้งปีการศึกษา</p>
+          </details>
+          <details class="faq-item">
+            <summary>สามารถอยู่มากกว่า 1 ชมรมได้หรือไม่?</summary>
+            <p>สามารถเข้าร่วมได้มากกว่า 1 ชมรม หากตารางเวลากิจกรรมไม่ตรงกันและไม่กระทบการเรียนหลัก</p>
+          </details>
+          <details class="faq-item">
+            <summary>ขั้นตอนการขอตั้งชมรมใหม่ทำอย่างไร?</summary>
+            <p>ต้องรวบรวมสมาชิกนักศึกษาไม่น้อยกว่า 10 คน พร้อมอาจารย์ที่ปรึกษาชมรม และยื่นแบบฟอร์มเสนอโครงการที่งานกิจกรรมนักศึกษา</p>
+          </details>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  :root {
+    --primary-color: #a81c1c;
+    --primary-hover: #821212;
+    --bg-card: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+  }
+
+  .contact-section {
+    padding: 3rem 1rem;
+    background-color: #f8fafc;
+    font-family: 'Sarabun', sans-serif;
+    color: var(--text-main);
+  }
+
+  .contact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .contact-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-header h2 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .contact-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info-card, .contact-form-card, .map-card, .faq-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .contact-info-card h3, .contact-form-card h3, .map-card h3, .faq-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .info-item p {
+    margin: 2px 0 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .icon-box {
+    width: 40px;
+    height: 40px;
+    background-color: #fee2e2;
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 1.5rem 0;
+  }
+
+  .social-block h4 {
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+    color: var(--text-main);
+  }
+
+  /* ปุ่ม Social Icons แบบวงกลม */
+  .social-icons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .social-btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+  }
+
+  .facebook { background-color: #1877f2; }
+  .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .tiktok { background-color: #000000; }
+  .youtube { background-color: #ff0000; }
+
+  /* Form Styling */
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+
+  .submit-btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.85rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: var(--primary-hover);
+  }
+
+  /* Bottom Grid (Map + FAQ) */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .map-container {
+    height: 220px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    background: #f9fafb;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+  }
+
+  .faq-item summary {
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+
+  .faq-item p {
+    margin: 0.5rem 0 0 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  /* Responsive */
+  @media (max-width: 850px) {
+    .contact-grid, .bottom-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+<!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            สถาบันการอาชีวศึกษาภาคเหนือ 3<br>
+            วิทยาลัยเทคนิคเพชรบูรณ์<br>
+            โทร : 056-713455<br>
+            อีเมล : pbtv212@pbtvc.ac.th
+        </div>
+        <div class="footer-social">
+            <a href="https://www.facebook.com/pbntc212" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/pbntc_phatchabun?fbclid=IwY2xjawT1NMFwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMUptSWFkWFlBNUU1SFdId0xzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeqMKcpNrXhVjkGf2qEfYhVu5asqF13Vax4Yh1QWXd1qkUD3rdpHWZ-ECdcaA_aem_GpxBOkOAA0u2pzh-C9AUOg" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@technical.story" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@TECHNICA_STORY" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+    </body>
+</html>
